@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Ramanjaneyulu K — Portfolio</title>
+
+<!-- High-Tech Modern Portfolio (Single File — HTML + CSS) -->
+<style>
+/* -------------------- Fonts -------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+:root{
+  --bg1: #0f1724;
+  --bg2: #071026;
+  --accent: #00f0ff;
+  --accent2: #6b6bff;
+  --glass: rgba(255,255,255,0.04);
+  --card: rgba(255,255,255,0.03);
+  --muted: #9aa4b2;
+  --glass-border: rgba(255,255,255,0.06);
+}
+
+/* -------------------- Base -------------------- */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(107,107,255,0.08), transparent),
+              radial-gradient(900px 500px at 90% 90%, rgba(0,240,255,0.04), transparent),
+              linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:#e6eef8;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  padding-bottom:80px;
+}
+
+/* -------------------- Layout -------------------- */
+.container{
+  max-width:1100px;
+  margin:32px auto;
+  padding:28px;
+  position:relative;
+}
+
+/* floating decorative blobs */
+.bg-blob{
+  position:fixed;
+  width:280px;
+  height:280px;
+  left:-80px;
+  top:-60px;
+  background:linear-gradient(135deg,var(--accent2),var(--accent));
+  filter:blur(56px);
+  opacity:0.12;
+  transform: rotate(10deg);
+  z-index:0;
+  animation: floatA 12s ease-in-out infinite;
+}
+.bg-blob.b2{
+  right:-90px;
+  left:auto;
+  top:60%;
+  width:360px;
+  height:360px;
+  filter:blur(72px);
+  opacity:0.09;
+  animation: floatB 14s ease-in-out infinite;
+}
+
+/* -------------------- Header / Intro -------------------- */
+.header{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  z-index:2;
+  position:relative;
+}
+.avatar {
+  width:96px;
+  height:96px;
+  border-radius:16px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  font-size:28px;
+  color:#051225;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 0 40px rgba(107,107,255,0.08);
+  transform: translateY(-6px);
+}
+.header .info{
+  flex:1;
+}
+.name{
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:0.6px;
+  margin:0 0 6px 0;
+}
+.role{
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* action area */
+.actions{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+.btn{
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:#031025;
+  padding:10px 14px;
+  border-radius:10px;
+  font-weight:700;
+  font-size:13px;
+  text-decoration:none;
+  box-shadow: 0 6px 18px rgba(0,240,255,0.06);
+  transition:transform .22s, box-shadow .22s;
+  border:1px solid rgba(255,255,255,0.06);
+}
+.btn:hover{ transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,240,255,0.09); }
+
+/* download resume uses local pdf path available on platform */
+.btn-outline{
+  padding:10px 12px;
+  border-radius:10px;
+  color:var(--accent);
+  border:1px solid rgba(255,255,255,0.06);
+  background:transparent;
+  font-weight:600;
+  text-decoration:none;
+}
+.btn-outline:hover{ transform: translateY(-4px); }
+
+/* -------------------- Grid content -------------------- */
+.grid{
+  display:grid;
+  grid-template-columns: 1fr 360px;
+  gap:20px;
+  margin-top:22px;
+  position:relative;
+  z-index:2;
+}
+
+/* left main column */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:14px;
+  padding:20px;
+  border:1px solid var(--glass-border);
+  box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+  backdrop-filter: blur(6px);
+  overflow:hidden;
+  transform-origin:center;
+}
+.card + .card{ margin-top:18px; }
+
+/* animated reveal */
+.reveal{
+  opacity:0;
+  transform: translateY(18px) scale(.99);
+  animation: revealUp .7s ease forwards;
+}
+.reveal.delay-1{ animation-delay:.12s; }
+.reveal.delay-2{ animation-delay:.18s; }
+.reveal.delay-3{ animation-delay:.26s; }
+
+/* keyframes */
+@keyframes revealUp{
+  to { opacity:1; transform: translateY(0) scale(1); }
+}
+@keyframes floatA{ 0%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(18px) rotate(10deg)}100%{transform:translateY(0) rotate(0deg)}}
+@keyframes floatB{ 0%{transform:translateY(0) rotate(-10deg)}50%{transform:translateY(-18px) rotate(6deg)}100%{transform:translateY(0) rotate(-10deg)}}
+
+/* -------------------- About / Summary -------------------- */
+.summary p{ color: #cfe9ff; line-height:1.6; margin:6px 0 0 0; font-size:15px; }
+
+/* -------------------- Skills with animated bars -------------------- */
+.skills-list{ display:flex; flex-direction:column; gap:12px; }
+.skill{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.skill .label{ width:110px; color:var(--muted); font-size:13px; }
+.skill .bar{
+  flex:1;
+  height:12px;
+  background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  border-radius:999px;
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.03);
+}
+.skill .fill{
+  position:absolute;
+  left:0; top:0; bottom:0;
+  width:0%;
+  background: linear-gradient(90deg,var(--accent),var(--accent2));
+  box-shadow: 0 6px 22px rgba(107,107,255,0.08);
+  border-radius:999px;
+  transform: translateZ(0);
+  animation: fillAnim 1.4s cubic-bezier(.2,.9,.2,1) forwards;
+}
+.skill[data-p="90"] .fill{ animation-delay:.3s; width:90%; }
+.skill[data-p="85"] .fill{ animation-delay:.36s; width:85%; }
+.skill[data-p="80"] .fill{ animation-delay:.42s; width:80%; }
+.skill[data-p="75"] .fill{ animation-delay:.48s; width:75%; }
+@keyframes fillAnim{ to { width: var(--w, 100%); } }
+
+/* little badges */
+.tag{ display:inline-block; padding:6px 10px; border-radius:999px; font-size:12px; background:rgba(255,255,255,0.02); color:var(--muted); border:1px solid rgba(255,255,255,0.03); }
+
+/* -------------------- Right column (side cards) -------------------- */
+.side .mini{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px;
+  border-radius:10px;
+  margin-bottom:12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.017), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.03);
+}
+.side h3{ margin:0; font-size:13px; color:#d7e8ff; }
+
+/* experience cards */
+.exp-list .exp-item{
+  padding:12px;
+  border-radius:10px;
+  margin-bottom:12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.03);
+}
+.exp-item h4{ margin:0 0 6px 0; font-size:14px; }
+.exp-item p{ margin:0; color:var(--muted); font-size:13px; }
+
+/* education list */
+.edu-list li{ margin-bottom:10px; color:var(--muted); font-size:14px; }
+
+/* contact */
+.contact p{ margin:8px 0; color:var(--muted); }
+
+/* -------------------- Footer / small notes -------------------- */
+.footer{
+  text-align:center;
+  margin-top:30px;
+  color:rgba(255,255,255,0.12);
+  font-size:12px;
+}
+
+/* -------------------- Responsive -------------------- */
+@media (max-width:980px){
+  .grid{ grid-template-columns: 1fr; }
+  .avatar{ display:none; }
+  .actions{ margin-top:12px; }
+  .container{ padding:18px; }
+}
+
+/* -------------------- Micro interactions -------------------- */
+.card:hover{ transform: translateY(-6px) scale(1.005); box-shadow: 0 20px 60px rgba(2,6,23,0.7); transition: all .36s cubic-bezier(.2,.9,.2,1); }
+
+</style>
+</head>
+<body>
+
+<div class="bg-blob"></div>
+<div class="bg-blob b2"></div>
+
+<div class="container">
+
+  <!-- Header -->
+  <header class="header reveal">
+    <div class="avatar">RK</div>
+    <div class="info">
+      <h1 class="name">RAMANJANEYULU K</h1>
+      <p class="role">Receptionist • Telecaller • Office & Front-end Basics</p>
+    </div>
+
+    <div class="actions">
+      <!-- Download button points to uploaded PDF path on platform -->
+      <a class="btn" href="./Resume.pdf" target="_blank" rel="noopener">Download Resume</a>
+      <a class="btn-outline" href="mailto:ramanjikuruva18@gmail.com">ramanjikuruva18@gmail.com</a>
+    </div>
+  </header>
+
+  <!-- Grid main content -->
+  <div class="grid">
+
+    <!-- LEFT: main -->
+    <div>
+
+      <section class="card summary reveal delay-1">
+        <h2>Career Objective</h2>
+        <p>I am seeking a role that leverages my administrative and communication strengths while allowing me to learn and grow. I bring discipline, client-facing experience and a strong willingness to learn technical skills.</p>
+        <div style="margin-top:12px;">
+          <span class="tag">Patient-facing</span>
+          <span class="tag" style="margin-left:8px">Customer Support</span>
+          <span class="tag" style="margin-left:8px">Office Admin</span>
+        </div>
+      </section>
+
+      <section class="card reveal delay-2" aria-labelledby="skills">
+        <h2 id="skills">Skills</h2>
+
+        <div class="skills-list" style="margin-top:10px;">
+          <div class="skill" data-p="90" style="--w:90%;">
+            <div class="label">MS Office</div>
+            <div class="bar"><div class="fill"></div></div>
+          </div>
+
+          <div class="skill" data-p="85" style="--w:85%;">
+            <div class="label">Typing (Eng)</div>
+            <div class="bar"><div class="fill"></div></div>
+          </div>
+
+          <div class="skill" data-p="75" style="--w:75%;">
+            <div class="label">HTML (Basics)</div>
+            <div class="bar"><div class="fill"></div></div>
+          </div>
+
+          <div class="skill" data-p="80" style="--w:80%;">
+            <div class="label">Communication</div>
+            <div class="bar"><div class="fill"></div></div>
+          </div>
+
+          <div class="skill" data-p="78" style="--w:78%;">
+            <div class="label">Customer Service</div>
+            <div class="bar"><div class="fill"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card reveal delay-3">
+        <h2>Experience Highlights</h2>
+        <ul style="margin:12px 0 0 18px; color:var(--muted);">
+          <li>Receptionist — Vijay Chandra Clinic, Kurnool: Front desk, appointments & records.</li>
+          <li>Telecaller — IJK Engineering Academy: Student follow-ups & coordination.</li>
+          <li>Sales & Network Marketing — Agriculture field: Customer relations & promotion.</li>
+        </ul>
+      </section>
+
+    </div>
+
+    <!-- RIGHT: side -->
+    <aside class="side">
+      <div class="card mini reveal" style="margin-bottom:14px;">
+        <div class="mini">
+          <div>
+            <h3>Contact</h3>
+            <p style="margin:6px 0 0 0; color:var(--muted)">+91-9346139189</p>
+            <p style="margin:6px 0 0 0; color:var(--muted)"><a href="mailto:ramanjikuruva18@gmail.com" style="color:var(--accent);text-decoration:none">ramanjikuruva18@gmail.com</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mini reveal" style="margin-bottom:14px;">
+        <h3>Education</h3>
+        <ul class="edu-list" style="margin-top:8px; padding-left:16px;">
+          <li><strong>B.Sc Computer Science</strong><br><span style="color:var(--muted)">Govt Degree College for Men, Kurnool — 2025</span></li>
+          <li style="margin-top:8px"><strong>MEC</strong><br><span style="color:var(--muted)">Govt Junior College for Boys, Yemmiganur — 2018</span></li>
+          <li style="margin-top:8px"><strong>SSC</strong><br><span style="color:var(--muted)">Govt High School for Boys, Kurnool — 2014</span></li>
+        </ul>
+      </div>
+
+      <div class="card reveal">
+        <h3>Strengths</h3>
+        <div class="exp-list" style="margin-top:8px;">
+          <div class="exp-item"><strong>Dedicated</strong><p>Goal-oriented and sincere towards achieving targets.</p></div>
+          <div class="exp-item"><strong>Quick Learner</strong><p>Adaptable and keen to learn new skills.</p></div>
+          <div class="exp-item"><strong>Team Player</strong><p>Good communication and coordination skills.</p></div>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+  <div class="footer">Designed with a modern, high-tech style • Pure HTML + CSS • Update the resume link if hosting</div>
+</div>
+
+</body>
+</html>
